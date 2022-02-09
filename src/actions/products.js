@@ -1,5 +1,7 @@
 import axios from "axios";
 import { actions } from ".";
+import { token } from ".";
+
 
 const addProducts = (products) => ({
     type: actions.ADD_PRODUCTS,
@@ -21,12 +23,12 @@ const deleteProduct = (id) => ({
     id
 })
 
-const getProducts = () => {
+export const getProducts = () => {
     return async (dispatch) => {
         try {
             const products = await axios({
                 method: 'get',
-                baseURL: 'http://localhost:4000/products'
+                url: 'http://localhost:4000/products'
             });
             dispatch(addProducts(products.data));
         } catch (error) {           
@@ -34,16 +36,16 @@ const getProducts = () => {
     }
 }
 
-const createProduct = (product) => {
+export const createProduct = (product) => {
     return async (dispatch) => {
         try {
             //need to add credential data
             const newProduct = await axios({
                 method: 'post',
-                baseURl: 'http://localhost:4000/product/create',
+                url: 'http://localhost:4000/product/create',
                 data: product,
                 headers: {
-                    //Authorization: 
+                    Authorization: `Bearer ${token}`
                 }
             });
             dispatch(addProduct(newProduct.data));
@@ -52,19 +54,19 @@ const createProduct = (product) => {
     }
 }
 
-const handleUpdateProducts = (product) => {
+export const handleUpdateProducts = (product) => {
     return async (dispatch) => {
         try {
             //need to add credential data
             const updatedProduct = await axios({
                 method: 'put',
-                baseURl: `http://localhost:4000/product/update/${product.id}`,
+                url: `http://localhost:4000/product/update/${product.id}`,
                 data: {
                     name: product.name,
                     price: product.price
                 },
                 headers: {
-                    //Authorization: 
+                    Authorization: `Bearer ${token}`
                 }
             });
             dispatch(updateProduct(updatedProduct.data))
@@ -74,15 +76,15 @@ const handleUpdateProducts = (product) => {
     }
 }
 
-const handleDeleteProducts = (id) => {
+export const handleDeleteProducts = (id) => {
     return async (dispatch) => {
         try {
             //need to add credential data
             const deletedProduct = await axios({
                 method: 'delete',
-                baseURl: `http://localhost:4000/product/delete/${id}`,
+                url: `http://localhost:4000/product/delete/${id}`,
                 headers: {
-                    //Authorization: 
+                    Authorization: `Bearer ${token}`
                 }
             });
             dispatch(deleteProduct(deletedProduct.data.id))

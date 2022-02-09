@@ -6,12 +6,18 @@ const addOrders = (orders) => ({
     orders
 })
 
-export const addProductToOrder = (product_id, quantity, order_id) => ({
-    type: actions.ADD_PRODUCT_TO_ORDER,
-    quantity,
-    product_id,
-    order_id
+export const addOrderToOrders = (cart) => ({
+    type: actions.ADD_ORDER_TO_ORDERS,
+    cart
 })
+
+export const formatCart = (cart) => {
+    const products = Object.values(cart)[0];
+    const cart_id = Object.key(cart)[0];
+    const formatProducts = {}
+    products.forEach(product => formatProducts[product.product_id] = product.quantity)
+    return {[cart_id]: formatProducts}
+}
 
 const formatOrders = (order_products, orders, user_id) => {
     const newOrders = {} 
@@ -25,19 +31,18 @@ const formatOrders = (order_products, orders, user_id) => {
     return newOrders;
 }
 
-const getOrders = (user_id) => {
+export const getOrders = (user_id) => {
     return async (dispatch) => {
         try {
             const orders = await axios({
                 method: 'get',
-                baseURL: 'http://localhost:4000/orders',
+                url: 'http://localhost:4000/orders',
              });
             const order_products = await axios({
                 method: 'get',
-                baseURL: 'http://localhost:4000/cart'
+                url: 'http://localhost:4000/cart'
             })
             dispatch(addOrders(formatOrders(order_products.data, orders.data, user_id)));
         } catch (error) {}
     }
 }
-
