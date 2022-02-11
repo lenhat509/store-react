@@ -1,29 +1,38 @@
 import React, {ReactDOM} from 'react'
 import {connect} from 'react-redux'
-import {getProducts} from '../actions/products';
-import {handleAddUsers} from '../actions/users';
-import {getOrders} from '../actions/orders';
-import {getActiveCart} from '../actions/cart'
 import { token } from '../actions'
+import { populateData } from '../actions';
+import { Container } from '@mui/material';
+import Dashboard from './Dashboard';
 
 const payload = JSON.parse(window.atob(token.split('.')[1]))
 
+
 class App extends React.Component{
+  
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(getProducts());
-    dispatch(handleAddUsers());
-    dispatch(getOrders(payload.id));
-    dispatch(getActiveCart(payload.id));
+    dispatch(populateData(payload.id));
   }
   render() {
     return (
-      <div>
-        <span>Front store</span>
-      </div>
+      <Container sx={{
+        width: 1,
+        height: 1
+      }}>
+      {this.props.loading ? null :
+        <Dashboard/>
+      }
+      </Container>
     );
   }
   
 }
 
-export default connect()(App);
+const mapStateToProps = ({loading}) => {
+  return {
+    loading
+  }
+}
+
+export default connect(mapStateToProps)(App);

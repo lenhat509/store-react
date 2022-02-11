@@ -7,6 +7,16 @@ const addUsers = (users) => ({
     users
 })
 
+const formatUsers = (users) => {
+    const newUsers = {};
+    users.forEach( user => {
+        newUsers[user.id] = {
+            firstname: user.firstname,
+            lastname: user.lastname
+        }
+    });
+    return newUsers;
+}
 
 export const handleAddUsers = () => {
     return async (dispatch) => {
@@ -18,7 +28,7 @@ export const handleAddUsers = () => {
                     Authorization: `Bearer ${token}`
                 }
             })
-            dispatch(addUsers(users.data));
+            dispatch(addUsers(formatUsers(users.data)));
         } catch (error) {
             console.log(error)
         }
