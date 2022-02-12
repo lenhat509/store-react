@@ -2,9 +2,9 @@ import React, {ReactDOM} from 'react'
 import {connect} from 'react-redux'
 import { token } from '../actions'
 import { populateData } from '../actions';
-import { Container } from '@mui/material';
 import Dashboard from './Dashboard';
-
+import NavBar from './NavBar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 const payload = JSON.parse(window.atob(token.split('.')[1]))
 
 
@@ -15,15 +15,20 @@ class App extends React.Component{
     dispatch(populateData(payload.id));
   }
   render() {
+    const {loading} = this.props;
     return (
-      <Container sx={{
-        width: 1,
-        height: 1
-      }}>
-      {this.props.loading ? null :
-        <Dashboard/>
-      }
-      </Container>
+      <BrowserRouter>
+        <div className='font-mono '>
+          <NavBar/>
+            {loading? null :
+              <Routes>
+                <Route exact path='/home' element={<Dashboard/>}/>
+
+              </Routes>
+            }
+        </div>
+      </BrowserRouter>
+      
     );
   }
   

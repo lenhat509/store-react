@@ -5,6 +5,8 @@ import {Provider} from 'react-redux';
 import { createStore } from 'redux'
 import reducers from './reducers';
 import middleware from './middleware';
+import './main.css'
+
 
 const store = createStore(reducers, middleware);
 ReactDOM.render(

@@ -9,11 +9,11 @@ class Dashboard extends React.Component {
     render() {
         const { products } = this.props;
         return (
-            <>
+            <div className='grid gap-3 text-center p-2'>
                 {products.map(product => (
                     <Product id={product.id} key={product.id}/>
                 ))}
-            </>
+            </div>
         )
     }
 }

@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .navbar-item {
+        @apply flex justify-center items-center h-12 p-2 mr-2 
+                bg-violet-200 text-violet-600 rounded-md
+                hover:bg-violet-600 hover:text-violet-50;
+    }
+    .navbar {
+        @apply relative flex md:flex-row flex-col gap-y-2 items-center md:justify-between p-2 
+                bg-violet-100 mb-7;
+    }
+    .navbar-items-tip {
+        @apply absolute -bottom-8 text-violet-50 bg-violet-900 rounded-md
+                pt-1 pb-1 pl-2 pr-2 text-sm 
+                transition-all duration-150 origin-top scale-0 ease-linear;
+    }
+    .active {
+        @apply bg-indigo-300 text-indigo-600
+    }
+    .nav-item-sm {
+        @apply scale-100 md:scale-0;
+    }
+}
