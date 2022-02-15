@@ -11,7 +11,7 @@
     }
     .navbar {
         @apply relative flex md:flex-row flex-col gap-y-2 items-center md:justify-between p-2 
-                bg-violet-100 mb-7;
+                bg-violet-100 mb-7 min-w-min;
     }
     .navbar-items-tip {
         @apply absolute -bottom-8 text-violet-50 bg-violet-900 rounded-md
@@ -23,5 +23,21 @@
     }
     .nav-item-sm {
         @apply scale-100 md:scale-0;
+    }
+    .product-form {
+        @apply flex flex-col  w-1/2 h-40 m-auto min-w-min mt-20
+                 rounded-md p-2 justify-around bg-indigo-200
+    }
+    .product-form-item {
+        @apply p-2 bg-transparent text-indigo-900 outline-none placeholder:text-indigo-300
+                text-center hover:bg-indigo-300 hover:placeholder:text-indigo-400 rounded-md
+                focus:bg-indigo-300
+    }
+    .product-form-submit {
+        @apply bg-violet-300 text-violet-700 hover:text-violet-100 hover:bg-violet-700
+                p-2 rounded-md
+    }
+    .card-detail {
+        @apply m-2 p-2 md:w-1/2 md:m-auto bg-violet-200 text-violet-600 flex flex-col rounded-md items-stretch
     }
 }

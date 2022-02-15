@@ -9,7 +9,7 @@ class NavBar extends React.Component {
         return (
             <div className='navbar'>
                 <div className='flex flex-row '>
-                        <NavLink activeClassName='active' to='/home' className='navbar-item'>Home</NavLink>
+                        <NavLink activeclassname='active' to='/home' className='navbar-item'>Home</NavLink>
                         <NavLink to='/product/create' className='navbar-item'>New Product</NavLink>
                         <NavLink to='/products/me' className='navbar-item'>My Products</NavLink>
                         <NavLink to='/history' className='navbar-item'>History</NavLink>
