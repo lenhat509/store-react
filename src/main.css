@@ -38,6 +38,24 @@
                 p-2 rounded-md
     }
     .card-detail {
-        @apply m-2 p-2 md:w-1/2 md:m-auto bg-violet-200 text-violet-600 flex flex-col rounded-md items-stretch
+        @apply m-2 p-2 md:mb-2 md:w-1/2 md:m-auto bg-violet-200 text-violet-600 flex flex-col rounded-md items-stretch
+    }
+    .remove-btn {
+        @apply bg-red-300 text-red-500 hover:text-red-100 hover:bg-red-500
+                p-2 rounded-md
+    }
+    .update-btn {
+        @apply bg-indigo-300 text-indigo-500 hover:text-indigo-100 hover:bg-indigo-500
+                p-2 rounded-md mr-2
+    }
+    .complete-order-card {
+        @apply flex flex-row bg-violet-100 rounded-md
+    }
+    .complete-product-card {
+        @apply flex flex-col items-start bg-violet-200 rounded-md text-violet-600 overflow-hidden p-2
+    }
+    .page-arrow {
+        @apply  flex justify-center items-center text-violet-600 bg-violet-200
+            hover:text-violet-100 hover:bg-violet-600 w-16 rounded-md grow-0 shrink-0
     }
 }

@@ -25,7 +25,7 @@ const formatOrders = (order_products, orders, user_id) => {
     userOrder.forEach(order => {
         const newOrder = {};
         const userOrderProducts = order_products.filter(entry => entry.order_id === order.id);
-        userOrderProducts.forEach(entry => newOrder[entry.order_id] = entry.quantity);
+        userOrderProducts.forEach(entry => newOrder[entry.product_id] = entry.quantity);
         newOrders[order.id] = newOrder;
     })
     return newOrders;

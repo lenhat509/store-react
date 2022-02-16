@@ -7,6 +7,10 @@ import NavBar from './NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NewProduct from './NewProduct';
 import ProductDetail from './ProductDetail';
+import MyProducts from './MyProducts';
+import Cart from './Cart';
+import History from './HIstory';
+
 const payload = JSON.parse(window.atob(token.split('.')[1]))
 
 
@@ -27,6 +31,9 @@ class App extends React.Component{
                 <Route exact path='/home' element={<Dashboard/>}/>
                 <Route path='/product/create' element={<NewProduct/>}/>
                 <Route path='/product/:id' element={<ProductDetail/>}/>
+                <Route path='/products/me' element={<MyProducts/>} />
+                <Route path='/cart' element={<Cart/>}/>
+                <Route path='/history' element={<History/>}/>
               </Routes>
             }
         </div>
