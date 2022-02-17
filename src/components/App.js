@@ -10,6 +10,9 @@ import ProductDetail from './ProductDetail';
 import MyProducts from './MyProducts';
 import Cart from './Cart';
 import History from './HIstory';
+import Login from './Login';
+import Signup from './Signup';
+import Account from './Account';
 
 const payload = JSON.parse(window.atob(token.split('.')[1]))
 
@@ -17,6 +20,8 @@ const payload = JSON.parse(window.atob(token.split('.')[1]))
 class App extends React.Component{
   
   componentDidMount() {
+    const token = localStorage.getItem('app-token');
+
     const { dispatch } = this.props;
     dispatch(populateData(payload.id));
   }
@@ -34,6 +39,9 @@ class App extends React.Component{
                 <Route path='/products/me' element={<MyProducts/>} />
                 <Route path='/cart' element={<Cart/>}/>
                 <Route path='/history' element={<History/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/signup' element={<Signup/>}/>
+                <Route path='/account' element={<Account/>}/>
               </Routes>
             }
         </div>

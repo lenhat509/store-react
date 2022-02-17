@@ -15,7 +15,7 @@ class NavBar extends React.Component {
                         <NavLink to='/history' className='navbar-item'>History</NavLink>
                 </div>
                 <div className='flex flex-row '>
-                    <NavLink to='/acccount' className='navbar-item group'>
+                    <NavLink to='/account' className='navbar-item group'>
                         <CogIcon className='h-10 w-10'/>
                         <span className='navbar-items-tip group-hover:scale-100'>Account</span>
                     </NavLink>

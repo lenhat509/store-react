@@ -9,7 +9,7 @@ const CompleteOrder = (props) => {
     return (
         <div className='m-2 flex flex-col text-violet-700'>
             <div>{`Order ${id}`}</div>
-            <Pagination itemsPerPage={5} >
+            <Pagination itemsPerPage={3} >
                 {Object.keys(order).map(id => (
                         <div className='complete-product-card' key={id}>
                             <div className='text-3xl mb-2' >{order[id].name}</div>
