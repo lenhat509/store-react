@@ -3,6 +3,7 @@ import {handleAddUsers} from './users';
 import {getOrders} from './orders';
 import {getActiveCart} from './cart'
 import { isLoading, stopLoading } from './loading';
+import { addToken } from './users';
 
 export const actions = {
     ADD_PRODUCTS: 'add_products',
@@ -19,19 +20,22 @@ export const actions = {
     ADD_PRODUCT_OF_USER: 'add_product_of_user',
     ADD_USERS: 'add_users',
     IS_LOADING: 'is_loading',
-    STOP_LOADING: 'stop_loading'
+    STOP_LOADING: 'stop_loading',
+    ADD_TOKEN: 'add_token',
+    REMOVE_TOKEN: 'remove_token'
 }
 
 
-export const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RuYW1lIjoiQWxleCIsImxhc3RuYW1lIjoiTGUiLCJwYXNzd29yZCI6IiQyYiQxMCRNbURnQkxLS3ZMelo5Q1ZHWVBhV2sueVU4WjdkZzhrZ0pJSDVtd2dqTzBiYjM2TEw0U3VGNiIsImlhdCI6MTY0Mzg1MDIxM30.ytsZnvkku6_TlhELkf9kkC8M7VW6Fxc8pMkPfSOPOvo'
-
-export const populateData = (user_id) => {
+export const populateData = () => {
     return async (dispatch) => {
         dispatch(isLoading());
+        const token = localStorage.getItem('app-token');
+        dispatch(addToken(token ? token : null))
+        const payload = token ? JSON.parse(window.atob(token.split('.')[1])) : null;
         await dispatch(getProducts());
-        await dispatch(getOrders(user_id));
-        await dispatch(getActiveCart(user_id));
         await dispatch(handleAddUsers());
+        await dispatch(getOrders(payload?.id));
+        await dispatch(getActiveCart(payload?.id));
         dispatch(stopLoading());
     }
 }

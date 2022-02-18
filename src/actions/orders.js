@@ -33,16 +33,21 @@ const formatOrders = (order_products, orders, user_id) => {
 
 export const getOrders = (user_id) => {
     return async (dispatch) => {
-        try {
-            const orders = await axios({
-                method: 'get',
-                url: 'http://localhost:4000/orders',
-             });
-            const order_products = await axios({
-                method: 'get',
-                url: 'http://localhost:4000/cart'
-            })
-            dispatch(addOrders(formatOrders(order_products.data, orders.data, user_id)));
-        } catch (error) {}
+        if(user_id) {
+            try {
+                const orders = await axios({
+                    method: 'get',
+                    url: 'http://localhost:4000/orders',
+                });
+                const order_products = await axios({
+                    method: 'get',
+                    url: 'http://localhost:4000/cart'
+                })
+                dispatch(addOrders(formatOrders(order_products.data, orders.data, user_id)));
+            } catch (error) {}
+        } else {
+            dispatch(addOrders({}))
+        }
+        
     }
 }

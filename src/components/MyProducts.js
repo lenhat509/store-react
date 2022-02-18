@@ -1,10 +1,9 @@
 import { useSelector } from 'react-redux'
 import { token } from '../actions'
 
-const payload = JSON.parse(window.atob(token.split('.')[1]))
 
 const MyProducts = (props) => {
-    const products = useSelector((state) => selectProductsOfUser(state, payload.id));
+    const products = useSelector((state) => selectProductsOfUser(state));
     return (
         <div>
             {products.map(product => (
@@ -14,12 +13,13 @@ const MyProducts = (props) => {
             </div>
             ))}
         </div>
-        
     )
 }
 
-const selectProductsOfUser = (state, user_id) => {
-    const { products } = state;
+const selectProductsOfUser = (state) => {
+    const { products, token} = state;
+    const user_id = token.user.id;
+
     return products.filter(product => product.user_id === user_id)
 }
 

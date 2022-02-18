@@ -1,7 +1,5 @@
 import axios from "axios";
 import { actions } from ".";
-import { token } from ".";
-
 
 const addProducts = (products) => ({
     type: actions.ADD_PRODUCTS,
@@ -37,9 +35,10 @@ export const getProducts = () => {
 }
 
 export const createProduct = (product) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         try {
             //need to add credential data
+            const { token:{user, token} } = getState();
             const newProduct = await axios({
                 method: 'post',
                 url: 'http://localhost:4000/product/create',
@@ -55,9 +54,10 @@ export const createProduct = (product) => {
 }
 
 export const handleUpdateProducts = (product) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         try {
             //need to add credential data
+            const { token:{user, token} } = getState();
             const updatedProduct = await axios({
                 method: 'put',
                 url: `http://localhost:4000/product/update/${product.id}`,
@@ -77,9 +77,10 @@ export const handleUpdateProducts = (product) => {
 }
 
 export const handleDeleteProducts = (id) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         try {
             //need to add credential data
+            const { token:{user, token} } = getState();
             const deletedProduct = await axios({
                 method: 'delete',
                 url: `http://localhost:4000/product/delete/${id}`,
