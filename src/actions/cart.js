@@ -58,7 +58,6 @@ export const getActiveCart = (user_id) => {
 export const handleAddProductToCart = (product_id, quantity) => {
     return async (dispatch, getState) => {
         try {
-            dispatch(isLoading())
             const { products, token } = getState();
             const productDetail = products.filter(product => product.id === product_id)[0];
             const newProduct = await axios({
@@ -77,12 +76,10 @@ export const handleAddProductToCart = (product_id, quantity) => {
                 name: productDetail.name,
                 price: productDetail.price,
                 quantity,
+                user_id: productDetail.user_id
             }))
         } catch (error) {   
             console.log(error.message)
-        }
-        finally {
-            dispatch(stopLoading())
         }
     }
 }
@@ -102,6 +99,7 @@ export const handleUpdateProductFromCart = (product_id, quantity) => {
                 }
             });
             dispatch(updateProductFromCart(product_id, quantity))
+
         } catch (error) { 
         }
     }
@@ -118,6 +116,7 @@ export const handleDeleteProductFromCart = (product_id) => {
                     Authorization: `Bearer ${token.token}`
                 }
             });
+            
             dispatch(removeProductFromCart(product_id))
         } catch (error) { 
         }
@@ -136,10 +135,10 @@ export const handleCompleteTheCart = () => {
                     Authorization: `Bearer ${token.token}`
                 }
             })
-            dispatch(completeCart(newCart.data));
+            dispatch(completeCart({[newCart.data.newOrder.id]: []}));
             dispatch(addOrderToOrders(formatCart(cart)))
         } catch (error) {
-            
+            console.log(error.message)
         }
     }
 }

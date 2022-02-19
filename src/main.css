@@ -38,7 +38,7 @@
                 p-2 rounded-md
     }
     .card-detail {
-        @apply m-2 p-2 md:mb-2 md:w-1/2 md:m-auto bg-violet-200 text-violet-600 flex flex-col rounded-md items-stretch
+        @apply p-2 mb-2 md:w-1/2 md:m-auto md:mb-2 bg-violet-200 text-violet-600 flex flex-col rounded-md items-stretch
     }
     .remove-btn {
         @apply bg-red-300 text-red-500 hover:text-red-100 hover:bg-red-500
@@ -72,4 +72,8 @@
     .lock-btn {
         @apply bg-violet-300 fill-violet-500 rounded-md h-10 p-2 hover:bg-violet-500 hover:fill-violet-100
     }
+    .place-order-btn {
+        @apply w-full md:w-1/2 block md:m-auto text-violet-100 bg-violet-500 hover:bg-violet-600 p-2 rounded-md
+    }
+    
 }

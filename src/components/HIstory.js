@@ -35,7 +35,9 @@ const History = (props) => {
     const history = useSelector(selectCompleteOrder);
     return (
         <div>
-            {Object.keys(history).map(id => (   
+            {Object.keys(history)
+            .sort((a, b) => b - a)
+            .map(id => (   
                     <CompleteOrder key={id} order={history[id]} id={id}/> 
             ))}
         </div>

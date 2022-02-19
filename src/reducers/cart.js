@@ -10,7 +10,7 @@ export const cart = (state = {}, action) => {
         case actions.ADD_PRODUCT_TO_CART:
             let id = Object.keys(state)[0];
             return {
-                [id] : [...state].concat([action.productDetail])
+                [id] : [...state[id]].concat([action.productDetail])
             }
         case actions.UPDATE_PRODUCT_FROM_CART:
             {
@@ -19,9 +19,9 @@ export const cart = (state = {}, action) => {
                 const newProducts = state[cart_id].map(product => 
                     product.product_id !== product_id ? product : {...product, quantity}
                 );
-                return {
-                    [id] : newProducts
-                }
+                return ({
+                    [cart_id] : newProducts
+                })
             }
         case actions.REMOVE_PRODUCT_FROM_CART:
             const d_cart_id = Object.keys(state)[0];
@@ -29,13 +29,13 @@ export const cart = (state = {}, action) => {
             const newProducts = state[d_cart_id].filter(product => 
                 product.product_id !== product_id 
             );
-            return {
-                [id] : newProducts
-            }
+            return ({
+                [d_cart_id] : newProducts
+            })
         case actions.COMPLETE_THE_CART:
-            return {
+            return ({
                 ...action.newCart
-            }
+            })
         default:
             return state;
     }

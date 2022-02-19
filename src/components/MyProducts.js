@@ -5,7 +5,7 @@ import { token } from '../actions'
 const MyProducts = (props) => {
     const products = useSelector((state) => selectProductsOfUser(state));
     return (
-        <div>
+        <div className='p-2'>
             {products.map(product => (
             <div key={product.id} className='card-detail mb-2'>
                 <div className='text-3xl mb-2'>{product.name}</div>

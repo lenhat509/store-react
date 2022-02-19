@@ -13,7 +13,7 @@ export const addOrderToOrders = (cart) => ({
 
 export const formatCart = (cart) => {
     const products = Object.values(cart)[0];
-    const cart_id = Object.key(cart)[0];
+    const cart_id = Object.keys(cart)[0];
     const formatProducts = {}
     products.forEach(product => formatProducts[product.product_id] = product.quantity)
     return {[cart_id]: formatProducts}

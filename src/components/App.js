@@ -14,6 +14,7 @@ import ProtectedElement from './ProtectedElement';
 import Logout from './Logout';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Rings } from 'react-loader-spinner';
 
 const  App = (props) => {
   const dispatch = useDispatch();
@@ -25,9 +26,9 @@ const  App = (props) => {
     
   return (
     <BrowserRouter>
-      <div className='font-mono min-w-min'>
+      <div className='font-mono min-w-min '>
         <NavBar/>
-          {loading? null :
+          {loading? <Rings wrapperClass='justify-center items-stretch' color="#CFBAF0" height={200} width={200}/> :
             <Routes>
               <Route exact path='/home' element={<Dashboard/>}/>
               <Route path='/product/create' element={
