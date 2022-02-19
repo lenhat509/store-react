@@ -28,10 +28,6 @@ const NavBar = () => {
                 </NavLink>
                 </>}
                 {user_id && <>
-                <NavLink to='/account' className='navbar-item group'>
-                    <CogIcon className='h-10 w-10'/>
-                    <span className='navbar-items-tip group-hover:scale-100'>Account</span>
-                </NavLink>
                 <NavLink to='/cart' className='navbar-item group'>
                     <ShoppingCartIcon className='h-10 w-10'/>
                     <span className='navbar-items-tip group-hover:scale-100'>Cart</span>

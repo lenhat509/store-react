@@ -1,15 +1,20 @@
 import React, {ReactDOM} from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const Product = (props) => {
     const {id} = props;
     const detail = useSelector(state => selectProductDetail(state.users, state.products, id))
+    const navigate = useNavigate();
+    const handleBuy = () => {
+        navigate(`/product/${id}`)
+    }
     return (
         <div className='card-detail'>
             <div className='text-3xl mb-2'>{detail.name}</div>
             <div className='text-sm text-violet-400'>{'Seller: ' + detail.username}</div>
             <div className='text-sm text-violet-500'>{'Price: '+ detail.price}</div>
-            <button className='product-form-submit mt-2' type='submit'>Buy</button>
+            <button className='product-form-submit mt-2' onClick={handleBuy}>Buy</button>
         </div>
     )
 }

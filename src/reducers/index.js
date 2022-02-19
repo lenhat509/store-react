@@ -5,6 +5,7 @@ import { cart } from './cart';
 import { orders } from './orders';
 import { loading } from './loading';
 import { token } from './token';
+import { status } from './status';
 
 export default combineReducers({
     users,
@@ -12,5 +13,6 @@ export default combineReducers({
     cart,
     orders,
     loading,
-    token
+    token,
+    status
 })

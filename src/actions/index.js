@@ -22,7 +22,9 @@ export const actions = {
     IS_LOADING: 'is_loading',
     STOP_LOADING: 'stop_loading',
     ADD_TOKEN: 'add_token',
-    REMOVE_TOKEN: 'remove_token'
+    REMOVE_TOKEN: 'remove_token',
+    REQUEST_SUCCEED: 'request_succeed',
+    REQUEST_FAIL: 'request_fail'
 }
 
 

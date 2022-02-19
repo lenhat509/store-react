@@ -1,5 +1,6 @@
 import axios from "axios";
 import { actions } from ".";
+import { isLoading, stopLoading } from "./loading";
 import { addOrderToOrders, formatCart }  from "./orders"
 
 const addActiveCart = (cart) => ({
@@ -57,6 +58,7 @@ export const getActiveCart = (user_id) => {
 export const handleAddProductToCart = (product_id, quantity) => {
     return async (dispatch, getState) => {
         try {
+            dispatch(isLoading())
             const { products, token } = getState();
             const productDetail = products.filter(product => product.id === product_id)[0];
             const newProduct = await axios({
@@ -77,6 +79,10 @@ export const handleAddProductToCart = (product_id, quantity) => {
                 quantity,
             }))
         } catch (error) {   
+            console.log(error.message)
+        }
+        finally {
+            dispatch(stopLoading())
         }
     }
 }

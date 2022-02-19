@@ -1,5 +1,4 @@
 import React, {ReactDOM, useEffect} from 'react'
-import { token } from '../actions'
 import { populateData } from '../actions';
 import Dashboard from './Dashboard';
 import NavBar from './NavBar';
@@ -11,7 +10,6 @@ import Cart from './Cart';
 import History from './History';
 import Login from './Login';
 import Signup from './Signup';
-import Account from './Account';
 import ProtectedElement from './ProtectedElement';
 import Logout from './Logout';
 import { useDispatch, useSelector } from 'react-redux';
@@ -59,11 +57,6 @@ const  App = (props) => {
               }/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/signup' element={<Signup/>}/>
-              <Route path='/account' element={
-                <ProtectedElement>
-                  <Account/>
-                </ProtectedElement>
-              }/>
               <Route path='/logout' element={
                 <ProtectedElement>
                   <Logout/>
