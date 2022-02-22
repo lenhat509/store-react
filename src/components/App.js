@@ -29,6 +29,8 @@ const  App = (props) => {
       <div className='font-mono min-w-min '>
         <NavBar/>
           {loading? <Rings wrapperClass='justify-center items-stretch' color="#CFBAF0" height={200} width={200}/> :
+          <>
+            
             <Routes>
               <Route exact path='/home' element={<Dashboard/>}/>
               <Route path='/product/create' element={
@@ -64,6 +66,7 @@ const  App = (props) => {
                 </ProtectedElement>
               }/>
             </Routes>
+          </>
           }
       </div>
     </BrowserRouter>

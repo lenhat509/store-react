@@ -15,7 +15,7 @@
     }
     .navbar-items-tip {
         @apply absolute -bottom-8 text-violet-50 bg-violet-900 rounded-md
-                pt-1 pb-1 pl-2 pr-2 text-sm 
+                pt-1 pb-1 pl-2 pr-2 text-sm z-10
                 transition-all duration-150 origin-top scale-0 ease-linear;
     }
     .active {
@@ -74,6 +74,13 @@
     }
     .place-order-btn {
         @apply w-full md:w-1/2 block md:m-auto text-violet-100 bg-violet-500 hover:bg-violet-600 p-2 rounded-md
+    }
+    .message-success {
+        @apply absolute text-center bg-green-400 text-green-600 
+    }
+    .message-error {
+        @apply absolute text-center bg-red-400 text-red-600 top-full left-0 w-full z-0
+            
     }
     
 }

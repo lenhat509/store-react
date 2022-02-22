@@ -1,12 +1,25 @@
 import { actions } from "../actions";
 
-export const status = (state = true, action) => {
+export const status = (state = defaultStatus, action) => {
     switch (action.type) {
         case actions.REQUEST_SUCCEED:
-            return true;
-        case actions.REQUEST_FAIL:
-            return false;
+            const { statusCode, message }  = action;
+            return {
+                statusCode,
+                message
+            };
+        case actions.REQUEST_FAIL: {
+            const { statusCode, message }  = action;
+            return {
+                statusCode,
+                message
+            };
+        }
         default:
             return state;
     }
+}
+const defaultStatus = {
+    statusCode: 200,
+    message: ""
 }

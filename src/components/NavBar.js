@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import { ShoppingCartIcon, CogIcon, PlusCircleIcon } from '@heroicons/react/solid'
 import { LoginIcon, LogoutIcon, ViewListIcon } from '@heroicons/react/outline'
 import { useSelector } from "react-redux";
-
-const NavBar = () => {
+import Status from "./Status";
+const NavBar = (props) => {
     const user_id = useSelector(state => state.token.user?.id)
     return (
         <div className='navbar'>
@@ -38,7 +38,7 @@ const NavBar = () => {
                 </NavLink>
                 </>}
             </div>
-            
+            <Status/>
         </div>
     )
 }

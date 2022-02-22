@@ -1,6 +1,7 @@
 import axios from "axios";
 import { actions, populateData } from ".";
 import { isLoading, stopLoading } from "./loading";
+import { requestFail, requestSucceed } from "./status";
 
 const addUsers = (users) => ({
     type: actions.ADD_USERS,
@@ -71,12 +72,12 @@ export const login = (firstname, lastname, password) => {
             {
                 const { token } = response.data;
                 dispatch(addToken(token));
-                localStorage.setItem('app-token', token)    
+                localStorage.setItem('app-token', token);
             }
-            else if (response.status === 401) {
-                throw new Error('Wrong Password');
+            else if (response.status === 401) { 
+                dispatch(requestFail(response.status, 'Wrong Password'));
             }
-            else throw new Error('User does not exist')
+            else dispatch(requestFail(response.status, 'User does not exist'));
             
         } catch (error) {
             console.log(error.message)
