@@ -20,6 +20,6 @@ export const status = (state = defaultStatus, action) => {
     }
 }
 const defaultStatus = {
-    statusCode: 200,
+    statusCode: null,
     message: ""
 }

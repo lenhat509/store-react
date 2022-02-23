@@ -4,8 +4,11 @@ import { ShoppingCartIcon, CogIcon, PlusCircleIcon } from '@heroicons/react/soli
 import { LoginIcon, LogoutIcon, ViewListIcon } from '@heroicons/react/outline'
 import { useSelector } from "react-redux";
 import Status from "./Status";
+
 const NavBar = (props) => {
     const user_id = useSelector(state => state.token.user?.id)
+    const loading = useSelector(state => state.loading)
+    const numberItems = useSelector(state => Object.values(state.cart)[0]?.length)
     return (
         <div className='navbar'>
             <div className='flex flex-row '>
@@ -28,8 +31,9 @@ const NavBar = (props) => {
                 </NavLink>
                 </>}
                 {user_id && <>
-                <NavLink to='/cart' className='navbar-item group'>
+                <NavLink to='/cart' className='navbar-item group relative'>
                     <ShoppingCartIcon className='h-10 w-10'/>
+                    <span className='badge'>{numberItems? numberItems : 0}</span>
                     <span className='navbar-items-tip group-hover:scale-100'>Cart</span>
                 </NavLink>
                 <NavLink to='/logout' className='navbar-item group'>
@@ -38,7 +42,8 @@ const NavBar = (props) => {
                 </NavLink>
                 </>}
             </div>
-            <Status/>
+            {!loading && <Status/>}
+            
         </div>
     )
 }

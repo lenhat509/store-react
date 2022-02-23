@@ -6,7 +6,7 @@ const Signup = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const firstname = e.target[0].value.trim();
         const lastname = e.target[1].value.trim();
@@ -19,8 +19,9 @@ const Signup = (props) => {
             password === confirmPassword
         )
         {
-            dispatch(signup(firstname, lastname, password));
-            navigate('/home', {replace : true});
+            const status = await dispatch(signup(firstname, lastname, password));
+            if(status === 200)
+                navigate('/home', {replace : true});
         }
     }
     return (

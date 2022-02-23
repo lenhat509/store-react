@@ -12,6 +12,7 @@ import Login from './Login';
 import Signup from './Signup';
 import ProtectedElement from './ProtectedElement';
 import Logout from './Logout';
+import PageNotFound from './404';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Rings } from 'react-loader-spinner';
@@ -65,6 +66,8 @@ const  App = (props) => {
                   <Logout/>
                 </ProtectedElement>
               }/>
+              <Route path='*' element={<PageNotFound/>}/>
+              
             </Routes>
           </>
           }

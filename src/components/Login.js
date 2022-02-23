@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/users";
 import { useLocation, useNavigate } from "react-router";
 
@@ -10,15 +10,16 @@ const Login = (props) => {
 
     const from = location.state?.from?.pathname || '/home' ;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const firstname = e.target[0].value.trim();
         const lastname = e.target[1].value.trim();
         const password = e.target[2].value.trim();
         if(firstname.length > 0 && lastname.length > 0 && password.length > 0)
         {
-            dispatch(login(firstname, lastname, password));
-            navigate(from, {replace : true});
+            const statusCode = await dispatch(login(firstname, lastname, password));
+            if(statusCode === 200)
+                navigate(from, {replace : true});
         }
     }
     return (

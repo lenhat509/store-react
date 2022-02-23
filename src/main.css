@@ -76,11 +76,13 @@
         @apply w-full md:w-1/2 block md:m-auto text-violet-100 bg-violet-500 hover:bg-violet-600 p-2 rounded-md
     }
     .message-success {
-        @apply absolute text-center bg-green-400 text-green-600 
+        @apply absolute text-center bg-green-400 text-green-600 top-full left-0 w-full z-0
     }
     .message-error {
         @apply absolute text-center bg-red-400 text-red-600 top-full left-0 w-full z-0
             
     }
-    
+    .badge {
+        @apply absolute bg-amber-200 rounded-full px-2 text-amber-700 left-2/3 bottom-2/3
+    }
 }

@@ -20,6 +20,7 @@ const ProductDetail = (props) => {
     })
     const [quantity, setQuantity] = useState(defaultQuantity);
     const productDetail = useSelector((state) => selectProductDetail(state, parseInt(id)));
+
     const validateForm = (e) => {
         setQuantity(() => {
             const quantity = parseInt(e.target.value? e.target.value : 1);
@@ -39,10 +40,11 @@ const ProductDetail = (props) => {
         navigate('/cart', { replace : true })
         
     }
+    if(productDetail == null)
+        return  <Navigate to='/home' replace/>
     return (
         <>
-        {!productDetail && <Navigate to='/home' replace/>}
-        <form className='card-detail m-2' onSubmit={handleSubmit}>
+        <form className='card-detail' onSubmit={handleSubmit}>
             <div className='text-3xl mb-2'>{productDetail.name}</div>
             <div className='text-sm text-violet-400'>{'Seller: ' + productDetail.username}</div>
             <div className='text-sm text-violet-500'>{'Price: '+ productDetail.price}</div>

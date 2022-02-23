@@ -1,5 +1,6 @@
 import axios from "axios";
 import { actions } from ".";
+import { requestSucceed } from "./status";
 
 const addProducts = (products) => ({
     type: actions.ADD_PRODUCTS,
@@ -50,6 +51,9 @@ export const createProduct = (product) => {
             dispatch(addProduct(newProduct.data));
         } catch (error) {           
         }     
+        finally {
+            dispatch(requestSucceed('Product Created'))
+        }
     }
 }
 

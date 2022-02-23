@@ -1,11 +1,16 @@
 import { useDispatch } from "react-redux"
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { handleLogout } from "../actions/users";
+import { useEffect } from "react";
 
 const Logout = (props) => {
     const dispatch = useDispatch();
-    dispatch(handleLogout());
-    return (<Navigate to='/home' replace/>)
+    const navigate = useNavigate();
+    useEffect(() => {
+        dispatch(handleLogout());
+        navigate('/home', {replace: true})
+    }, [])
+    return null;
 }
 
 export default Logout;

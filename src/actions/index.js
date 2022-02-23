@@ -42,3 +42,9 @@ export const populateData = () => {
     }
 }
 
+export class NetworkError extends Error {
+    constructor(statusCode, message) {
+        super(message);
+        this.statusCode = statusCode;
+    }
+}

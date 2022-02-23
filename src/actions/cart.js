@@ -1,7 +1,7 @@
 import axios from "axios";
 import { actions } from ".";
-import { isLoading, stopLoading } from "./loading";
 import { addOrderToOrders, formatCart }  from "./orders"
+import { requestSucceed } from "./status";
 
 const addActiveCart = (cart) => ({
     type: actions.ADD_ACTIVE_CART,
@@ -81,6 +81,9 @@ export const handleAddProductToCart = (product_id, quantity) => {
         } catch (error) {   
             console.log(error.message)
         }
+        finally {
+            dispatch(requestSucceed('Added to Cart'))
+        }
     }
 }
 export const handleUpdateProductFromCart = (product_id, quantity) => {
@@ -101,6 +104,10 @@ export const handleUpdateProductFromCart = (product_id, quantity) => {
             dispatch(updateProductFromCart(product_id, quantity))
 
         } catch (error) { 
+
+        }
+        finally {
+            dispatch(requestSucceed('Updated Item'))
         }
     }
 }
@@ -120,6 +127,10 @@ export const handleDeleteProductFromCart = (product_id) => {
             dispatch(removeProductFromCart(product_id))
         } catch (error) { 
         }
+
+        finally {
+            dispatch(requestSucceed('Delete Product'));
+        }
     }
 }
 
@@ -138,7 +149,9 @@ export const handleCompleteTheCart = () => {
             dispatch(completeCart({[newCart.data.newOrder.id]: []}));
             dispatch(addOrderToOrders(formatCart(cart)))
         } catch (error) {
-            console.log(error.message)
+        }
+        finally {
+            dispatch(requestSucceed('Your order has been placed'))
         }
     }
 }

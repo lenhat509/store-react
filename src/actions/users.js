@@ -2,7 +2,7 @@ import axios from "axios";
 import { actions, populateData } from ".";
 import { isLoading, stopLoading } from "./loading";
 import { requestFail, requestSucceed } from "./status";
-
+import { NetworkError } from './index'
 const addUsers = (users) => ({
     type: actions.ADD_USERS,
     users
@@ -35,6 +35,7 @@ export const handleLogout = () => {
     return dispatch => {
         dispatch(removeToken());
         dispatch(populateData());
+        dispatch(requestSucceed('You just logged out'))
     }
 }
 
@@ -54,6 +55,7 @@ export const handleAddUsers = () => {
 
 export const login = (firstname, lastname, password) => {
     return async (dispatch) => {
+        let statusCode = 200;
         try {
             dispatch(isLoading())
             const response = await axios({
@@ -68,23 +70,29 @@ export const login = (firstname, lastname, password) => {
                     return status >= 200;
                 }
             })
+            statusCode = response.status;
             if(response.status === 200)
             {
                 const { token } = response.data;
                 dispatch(addToken(token));
                 localStorage.setItem('app-token', token);
+                dispatch(requestSucceed('Login succeed'));
+
             }
             else if (response.status === 401) { 
-                dispatch(requestFail(response.status, 'Wrong Password'));
+                throw new NetworkError(response.status, 'Wrong Password');
+                
             }
-            else dispatch(requestFail(response.status, 'User does not exist'));
+            else throw new NetworkError(response.status, 'User does not exist');
+
             
         } catch (error) {
-            console.log(error.message)
+            dispatch(requestFail(error.statusCode, error.message));
         }
         finally {
             await dispatch(populateData());
             dispatch(stopLoading());
+            return statusCode;
         }
     }
 }
@@ -92,6 +100,7 @@ export const login = (firstname, lastname, password) => {
 
 export const signup = (firstname, lastname, password) => {
     return async (dispatch) => {
+        let statusCode = 200;
         try {
             dispatch(isLoading())
             const response = await axios({
@@ -106,20 +115,23 @@ export const signup = (firstname, lastname, password) => {
                     return status >= 200;
                 }
             })
+            statusCode = response.status;
             if(response.status === 200)
             {
                 const { token } = response.data;
                 dispatch(addToken(token));
-                localStorage.setItem('app-token', token)    
+                localStorage.setItem('app-token', token)
+                dispatch(requestSucceed('User created'))    
             }
-            else throw new Error('User already exist')
+            else throw new NetworkError(response.status, 'User already exist');
             
         } catch (error) {
-            throw error;
+            dispatch(requestFail(error.statusCode, error.message))
         }
         finally {
             await dispatch(populateData());
             dispatch(stopLoading());
+            return statusCode;
         }
     }
 }

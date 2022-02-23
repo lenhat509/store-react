@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 const Status = (props) => {
     const status = useSelector(state => state.status);
     return (
-        <div className={`animate-fadeout ${status.statusCode === 200 ? 'message-success' : 'message-error'}`}>
+        <div 
+            key={Math.random()}
+            className={status.statusCode === 200 ? 'animate-fadeout message-success' : 'animate-fadeout message-error'}>
             <span>{status.message}</span>
         </div>
     )
