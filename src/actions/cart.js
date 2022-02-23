@@ -2,7 +2,7 @@ import axios from "axios";
 import { actions } from ".";
 import { addOrderToOrders, formatCart }  from "./orders"
 import { requestSucceed } from "./status";
-
+import { APIUrl } from ".";
 const addActiveCart = (cart) => ({
     type: actions.ADD_ACTIVE_CART,
     cart
@@ -38,11 +38,11 @@ export const getActiveCart = (user_id) => {
                 const { token } = getState();
                 const activeOrder = await axios({
                     method: 'get',
-                    url: `http://localhost:4000/order/active/${user_id}`
+                    url: `${APIUrl}/order/active/${user_id}`
                 });
                 const cart = await axios({
                     method: 'get',
-                    url: `http://localhost:4000/cart/${activeOrder.data.id}`,
+                    url: `${APIUrl}/cart/${activeOrder.data.id}`,
                     headers: {
                         Authorization: `Bearer ${token.token}`
                     }
@@ -62,7 +62,7 @@ export const handleAddProductToCart = (product_id, quantity) => {
             const productDetail = products.filter(product => product.id === product_id)[0];
             const newProduct = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/cart/add',
+                url: `${APIUrl}/cart/add`,
                 data: {
                     product_id,
                     quantity
@@ -92,7 +92,7 @@ export const handleUpdateProductFromCart = (product_id, quantity) => {
             const {token} = getState();
             const orderProduct = await axios({
                 method: 'put',
-                url: 'http://localhost:4000/cart/update',
+                url: `${APIUrl}/cart/update`,
                 data: {
                     product_id,
                     quantity
@@ -118,7 +118,7 @@ export const handleDeleteProductFromCart = (product_id) => {
             const {token} = getState();
             const orderProduct = await axios({
                 method: 'delete',
-                url: `http://localhost:4000/cart/delete/${product_id}`,
+                url: `${APIUrl}/cart/delete/${product_id}`,
                 headers: {
                     Authorization: `Bearer ${token.token}`
                 }
@@ -141,7 +141,7 @@ export const handleCompleteTheCart = () => {
             const order_id = Object.keys(cart)[0];
             const newCart = await axios({
                 method: 'put',
-                url: `http://localhost:4000/order/complete/${order_id}`,
+                url: `${APIUrl}/order/complete/${order_id}`,
                 headers: {
                     Authorization: `Bearer ${token.token}`
                 }

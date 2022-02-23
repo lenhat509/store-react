@@ -48,3 +48,5 @@ export class NetworkError extends Error {
         this.statusCode = statusCode;
     }
 }
+
+export const APIUrl = 'http://localhost:4000';

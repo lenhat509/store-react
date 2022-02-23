@@ -1,6 +1,6 @@
 import axios from "axios";
 import { actions } from ".";
-
+import { APIUrl } from ".";
 const addOrders = (orders) => ({
     type: actions.ADD_ORDERS,
     orders
@@ -37,11 +37,11 @@ export const getOrders = (user_id) => {
             try {
                 const orders = await axios({
                     method: 'get',
-                    url: 'http://localhost:4000/orders',
+                    url: `${APIUrl}/orders`,
                 });
                 const order_products = await axios({
                     method: 'get',
-                    url: 'http://localhost:4000/cart'
+                    url: `${APIUrl}/cart`
                 })
                 dispatch(addOrders(formatOrders(order_products.data, orders.data, user_id)));
             } catch (error) {}

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { actions, populateData } from ".";
+import { actions, populateData , APIUrl} from ".";
 import { isLoading, stopLoading } from "./loading";
 import { requestFail, requestSucceed } from "./status";
 import { NetworkError } from './index'
@@ -44,7 +44,7 @@ export const handleAddUsers = () => {
         try {
             const users = await axios({
                 method: 'get',
-                url: 'http://localhost:4000/users',
+                url: `${APIUrl}/users`,
             })
             dispatch(addUsers(formatUsers(users.data)));
         } catch (error) {
@@ -60,7 +60,7 @@ export const login = (firstname, lastname, password) => {
             dispatch(isLoading())
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/user/signin',
+                url: `${APIUrl}/user/signin`,
                 data: {
                     firstname,
                     lastname,
@@ -105,7 +105,7 @@ export const signup = (firstname, lastname, password) => {
             dispatch(isLoading())
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/user/signup',
+                url: `${APIUrl}/user/signup`,
                 data: {
                     firstname,
                     lastname,

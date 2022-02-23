@@ -1,5 +1,5 @@
 import axios from "axios";
-import { actions } from ".";
+import { actions, APIUrl } from ".";
 import { requestSucceed } from "./status";
 
 const addProducts = (products) => ({
@@ -27,7 +27,7 @@ export const getProducts = () => {
         try {
             const products = await axios({
                 method: 'get',
-                url: 'http://localhost:4000/products'
+                url: `${APIUrl}/products`
             });
             dispatch(addProducts(products.data));
         } catch (error) {           
@@ -42,7 +42,7 @@ export const createProduct = (product) => {
             const { token:{user, token} } = getState();
             const newProduct = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/product/create',
+                url: `${APIUrl}/product/create`,
                 data: product,
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -64,7 +64,7 @@ export const handleUpdateProducts = (product) => {
             const { token:{user, token} } = getState();
             const updatedProduct = await axios({
                 method: 'put',
-                url: `http://localhost:4000/product/update/${product.id}`,
+                url: `${APIUrl}/product/update/${product.id}`,
                 data: {
                     name: product.name,
                     price: product.price
@@ -87,7 +87,7 @@ export const handleDeleteProducts = (id) => {
             const { token:{user, token} } = getState();
             const deletedProduct = await axios({
                 method: 'delete',
-                url: `http://localhost:4000/product/delete/${id}`,
+                url: `${APIUrl}/product/delete/${id}`,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
