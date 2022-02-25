@@ -23,9 +23,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "frontend:build": "react-scripts build",
+    "frontend:css-build": "npx tailwindcss -i ./src/main.css -o ./dist/output.css",
+    "frontend:install": "npm install"
   },
   "eslintConfig": {
     "extends": [

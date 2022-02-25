@@ -34,7 +34,7 @@ const NavBar = (props) => {
                 <NavLink to='/cart' className='navbar-item group relative'>
                     <ShoppingCartIcon className='h-10 w-10'/>
                     <span className='badge'>{numberItems? numberItems : 0}</span>
-                    <span className='navbar-items-tip group-hover:scale-100'>Cart</span>
+                    <span className='navbar-items-tip -bottom-10 group-hover:scale-100'>Cart</span>
                 </NavLink>
                 <NavLink to='/logout' className='navbar-item group'>
                     <LogoutIcon className='h-10 w-10'/>

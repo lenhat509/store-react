@@ -49,4 +49,4 @@ export class NetworkError extends Error {
     }
 }
 
-export const APIUrl = 'http://localhost:4000';
+export const APIUrl = 'http://storefront.eba-ygrmbmqe.us-west-1.elasticbeanstalk.com';

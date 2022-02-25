@@ -2,7 +2,7 @@ import React, {ReactDOM, useEffect} from 'react'
 import { populateData } from '../actions';
 import Dashboard from './Dashboard';
 import NavBar from './NavBar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import NewProduct from './NewProduct';
 import ProductDetail from './ProductDetail';
 import MyProducts from './MyProducts';
@@ -32,7 +32,7 @@ const  App = (props) => {
           {loading? <Rings wrapperClass='justify-center items-stretch' color="#CFBAF0" height={200} width={200}/> :
           <>
             
-            <Routes>
+            <Routes >
               <Route exact path='/home' element={<Dashboard/>}/>
               <Route path='/product/create' element={
                 <ProtectedElement>
@@ -66,6 +66,7 @@ const  App = (props) => {
                   <Logout/>
                 </ProtectedElement>
               }/>
+              <Route exact path='/' element={<Navigate to='/home'/>}/>
               <Route path='*' element={<PageNotFound/>}/>
               
             </Routes>
