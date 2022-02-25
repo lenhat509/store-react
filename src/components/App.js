@@ -2,7 +2,7 @@ import React, {ReactDOM, useEffect} from 'react'
 import { populateData } from '../actions';
 import Dashboard from './Dashboard';
 import NavBar from './NavBar';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate, HashRouter } from 'react-router-dom';
 import NewProduct from './NewProduct';
 import ProductDetail from './ProductDetail';
 import MyProducts from './MyProducts';
@@ -26,7 +26,7 @@ const  App = (props) => {
   }, []) 
     
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className='font-mono min-w-min '>
         <NavBar/>
           {loading? <Rings wrapperClass='justify-center items-stretch' color="#CFBAF0" height={200} width={200}/> :
@@ -73,7 +73,7 @@ const  App = (props) => {
           </>
           }
       </div>
-    </BrowserRouter>
+    </HashRouter>
     
   );
 }
